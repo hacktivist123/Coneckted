@@ -6,7 +6,6 @@
    try {
      await mongoose.connect(db, {
        useNewUrlParser: true
-
      });
 
      console.log('MongoDB Connected...')
