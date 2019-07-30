@@ -161,7 +161,34 @@ router.get('/user/:user_id', async (req, res) => {
     }
     res.status(500).send('Cannot Get Profiles');
   }
-})
+});
+
+// @route   DELETE api/profile
+// @desc    Delete profile, user & posts
+// @access  Private
+
+router.delete('/', auth, async (req, res) => {
+  try {
+    // @todo - remove users posts
+
+    // Remove profile
+    await Profile.findOneAndRemove({
+      user: req.user.id
+    });
+    // Remove User
+    await User.findOneAndRemove({
+      _id: req.user.id
+    });
+    res.json({
+      msg: 'User Deleted'
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Cannot Get Profile');
+
+  }
+});
+
 
 
 module.exports = router;
