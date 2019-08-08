@@ -237,9 +237,9 @@ router.put(
     };
 
     try {
-      const Profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({ user: req.user.id });
 
-      //pushes new object in the array to the beginning
+      //push new object in the array to the beginning
       profile.experience.unshift(newExp);
 
       await profile.save();
